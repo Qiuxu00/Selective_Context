@@ -1,4 +1,4 @@
-import newspaper
+﻿import newspaper
 from tqdm import tqdm
 
 def main():

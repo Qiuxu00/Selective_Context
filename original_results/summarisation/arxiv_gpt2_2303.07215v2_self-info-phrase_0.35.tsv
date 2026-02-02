@@ -1,0 +1,12 @@
+
+The following example shows how to parse a string that has the following contents:
+
+#
+
+# <!DOCTYPE html> <html> <head> <meta charset="UTF-8" content="text/html; charset=utf-8"> <title>Theorem: A String With a Type Type</title> <meta name="text/html; charset=utf-8" content="text/html; charset=utf-8"> <meta name="description" content="Theorem: A string with a type type that is equal to a string with type type type="string"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.css" rel="stylesheet" > <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> <script type="text/javascript"> var i = 0; var j = parseInt(i); i<= i.length; i++) { $("#<style>". $("#1").css("#1"), "#1").style("margin: auto;"); j = parseInt(i); i<= j.length; i++) { $("#<style>". $("#2").css("#2"), "#2").style("margin: auto;"); } }
+
+The above example uses the specifier "type" to define which type of string it is. So "type" is the same as "type" for "a string with type type type typetypeType type" and "type" is more general.
+
+Now the value of "type" is an arbitrary value that can be determined by some other way. For example, the following code does not use "type" for type type "a string with type type type type type type type type" :
+
+var foo = "bar"; // foo.type = "type" var bar = "bar";

@@ -1,4 +1,4 @@
-from transformers import GPT2Tokenizer, GPT2LMHeadModel, BertTokenizer
+﻿from transformers import GPT2Tokenizer, GPT2LMHeadModel, BertTokenizer
 import torch
 import streamlit as st
 import re

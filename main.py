@@ -1,4 +1,4 @@
-from qa_manager import *
+﻿from qa_manager import *
 from utils import *
 from context_manager import *
 import sys
@@ -8,7 +8,7 @@ import logging
 import copy
 
 def save_as_pickle(obj, file_path):
-    with open(file_path, 'wb') as f:
+    with open(file_path, 'wb',encoding='utf-8') as f:
         pickle.dump(obj, f)
     logging.info(f'Saved to {file_path}')
 
@@ -20,7 +20,24 @@ def display_performance(context: ContextAndAnswer):
 
 def main():
     arxiv_path, news_path, conversation_path, save_to_path, num_articles, model_name = sys.argv[1:]
-    logging.basicConfig(level=logging.INFO, filename=os.path.join(save_to_path, f'log_{model_name}.txt'), filemode='w', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    
+    # === 修改 1: 自动创建结果文件夹 (修复 FileNotFoundError) ===
+    import os
+    if not os.path.exists(save_to_path):
+        os.makedirs(save_to_path)
+    # ======================================================
+
+    # === 修改 2: 强制日志使用 UTF-8 (修复潜在的乱码报错) ===
+    logging.basicConfig(
+        level=logging.INFO, 
+        filename=os.path.join(save_to_path, f'log_{model_name}.txt'), 
+        filemode='w', 
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        encoding='utf-8'  # <--- 关键！Python 3.9+ 支持直接加这个参数
+    )
+    # ====================================================
+
+    task_name = "evaluation"
     logging.info(f'arxiv_path: {arxiv_path}, news_path: {news_path}, conversation_path: {conversation_path}, save_to_path: {save_to_path}, num_articles: {num_articles}, model_name: {model_name}, task_name: {task_name}')
     num_articles = int(num_articles)
     

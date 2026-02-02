@@ -1,4 +1,4 @@
-# Use OpenAI's GPT-3.5-turbo to generate questions and answer from a given document
+﻿# Use OpenAI's GPT-3.5-turbo to generate questions and answer from a given document
 from typing import List, Dict, Tuple, Union
 from dataclasses import dataclass, asdict
 from context_manager import ArxivContext
@@ -66,6 +66,8 @@ class TaskManager:
         # self._prepare_evaluation(metrics)
     
     def _prepare_model(self):
+        self.model_instruct_tuned = False # 默认初始化为 False
+        print(f'-- Start preparing model {self.model_type}.')
         # prepare model and generate function
         # should support GPT-3.5-turbo, llama-7B,13B,30B, and Flan family?
         print(f'-- Start preparing model {self.model_type}.')
@@ -127,7 +129,7 @@ class TaskManager:
             self._generate_answer = self._lm_generate
         elif 'flan' in self.model_type:
             self.model_instruct_tuned = True
-            tokenizer = T5Tokenizer.from_pretrained(f"google/{model_type}")
+            tokenizer = T5Tokenizer.from_pretrained(f"google/{self.model_type}")
             model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-xxl", torch_dtype=torch.float16, device_map="auto")
             model.eval()
             bs = {
@@ -149,6 +151,40 @@ class TaskManager:
                 # num_beams=4,
             )
             self._generate_answer = self._lm_generate
+        elif 'gpt2' in self.model_type:
+            # === 新增/优化 GPT-2 适配逻辑 ===
+            from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
+            self.model_instruct_tuned = False 
+            self.batch_size = 24
+            
+            # 加载模型和分词器
+            self.tokenizer = AutoTokenizer.from_pretrained("gpt2")
+            self.tokenizer.padding_side = 'left'
+            self.model = AutoModelForCausalLM.from_pretrained("gpt2", device_map='auto')
+            self.model.eval()
+
+            # 设置 pad_token（GPT-2 默认没有，必须手动指定，否则批处理会报错）
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+            
+            # 1. 使用模型自带配置创建 GenerationConfig，确保兼容性
+            g_config = GenerationConfig.from_model_config(self.model.config)
+            
+            # 2. 更新实验所需的生成参数
+            g_config.update(
+                temperature=1.0,
+                top_k=50,
+                eos_token_id=self.tokenizer.eos_token_id,
+                pad_token_id=self.tokenizer.eos_token_id,
+                max_new_tokens=450 # 显式定义，防止 pipeline 默认值过短
+            )
+            
+            # 3. 关键：将配置直接绑定到模型对象上
+            # 这样我们在 _lm_answer_batch 里调用 pipeline 时，就不需要再传参数了
+            self.model.generation_config = g_config
+            self.generation_config = g_config
+            
+            self._generate_answer = self._lm_generate
+            # ========================
         elif 'vicuna' in self.model_type:
             self.model_instruct_tuned = True
             size = self.model_type.split('-')[-1]
@@ -170,32 +206,71 @@ class TaskManager:
 
             self._generate_answer = self._lm_generate
     
-    def _lm_generate(self, prompt):
-        # generate answer sequentially
-        input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.model.device)
+    def _lm_generate(self, prompt, num_retry=5):
+        # === 修复点 1：输入截断 (核心防爆锁) ===
+        # GPT-2 上限 1024。我们预留 500 给生成，输入强制限制在 520 以内。
+        # truncation=True 是防止爆仓的关键
+        inputs = self.tokenizer(prompt, return_tensors="pt", truncation=True, max_length=520)
+        input_ids = inputs.input_ids.to(self.model.device)
+
         with torch.no_grad():
-            outputs = self.model.generate(input_ids, generation_config=self.generation_config, return_dict_in_generate=True, max_new_tokens=500)
+            # === 修复点 2：更安全的配置读取 ===
+            # 防止 self.generation_config 未定义
+            g_config = getattr(self, 'generation_config', None)
+            
+            outputs = self.model.generate(
+                input_ids, 
+                generation_config=g_config, 
+                return_dict_in_generate=True, 
+                max_new_tokens=500,
+                # === 修复点 3：显式指定 pad_token，消除警告 ===
+                pad_token_id=self.tokenizer.eos_token_id 
+            )
+        
         s = outputs.sequences[0]
         prompt_len = input_ids.shape[1]
-        output = self.tokenizer.decode(s[prompt_len:])
+        # === 修复点 4：解码时跳过特殊符号 (可选优化) ===
+        output = self.tokenizer.decode(s[prompt_len:], skip_special_tokens=True)
         return output
     
     def _lm_answer_batch(self, prompts):
-        # generate answer in batchs
+        # 1. 确保生成器（Pipeline）已初始化
         if not hasattr(self, 'generator'):
-            self.tokenizer.pad_token_id = self.model.config.eos_token_id
-            if 'vicuna' in self.model_type:
-                generation_config = GenerationConfig(
-                    bos_token_id = 1,
-                    eos_token_id = 2,
-                    pad_token_id = 0,
-                )
-            else:
-                generation_config = None
-            self.generator = pipeline('text-generation', model=self.model, tokenizer=self.tokenizer, generation_config=generation_config)
-        print('Batched generation started. num_prompts:', len(prompts), ', batch_size:', self.batch_size, ', self.model.device:', self.model.device, ', pipeline.device:', self.generator.device)
-        outputs = self.generator(prompts, max_new_tokens=450, batch_size = self.batch_size, return_full_text=False)
-        print(outputs)
+            if self.tokenizer.pad_token_id is None:
+                self.tokenizer.pad_token_id = self.model.config.eos_token_id
+            
+            g_config = getattr(self, 'generation_config', None)
+            if g_config is not None:
+                self.model.generation_config = g_config
+            
+            self.generator = pipeline(
+                'text-generation', 
+                model=self.model, 
+                tokenizer=self.tokenizer,
+                device=self.model.device
+            )
+
+        # 2. 【核心保护】在调用显卡前，强制截断所有 Prompt
+        # GPT-2 限制 1024。公式：$570 (输入) + 450 (输出) = 1020 \le 1024$
+        safe_prompts = []
+        for p in prompts:
+            # 截断并解码回字符串，确保输入在安全长度内
+            # 这里的 truncation=True 是第一道防线
+            encoding = self.tokenizer(p, truncation=True, max_length=570)
+            safe_prompts.append(self.tokenizer.decode(encoding['input_ids'], skip_special_tokens=True))
+
+        print(f'Batched generation started. num_prompts: {len(safe_prompts)}, batch_size: {self.batch_size}')
+        
+        # 3. 【唯一调用】使用安全提示词进行批处理生成
+        outputs = self.generator(
+            safe_prompts, 
+            max_new_tokens=450, 
+            batch_size=self.batch_size, 
+            return_full_text=False,
+            # 这里的 truncation 是针对 pipeline 内部的第二道防线
+            truncation=True 
+        )
+        
         return [output[0]['generated_text'] for output in outputs]
     
     def _gpt_3_5_turbo_generate(self, prompt, num_retry = 5):
@@ -336,7 +411,7 @@ class Summarisation(TaskManager):
                     if self.model_type == "gpt-3.5-turbo":
                         summary = self._generate_answer(prompt)
                         # save the summary
-                        with open(summary_save_file, 'w') as f:
+                        with open(summary_save_file, 'w',encoding='utf-8') as f:
                             f.write(summary)
                     else:
                         prompts.append(prompt)
@@ -347,7 +422,7 @@ class Summarisation(TaskManager):
                 summaries = self._lm_answer_batch(prompts)
                 for summary, summary_save_file in zip(summaries, out_files):
                     # save the summary
-                    with open(summary_save_file, 'w') as f:
+                    with open(summary_save_file, 'w',encoding='utf-8') as f:
                         f.write(summary)
                     print(f"Saved to {summary_save_file}")
             
@@ -355,7 +430,7 @@ class Summarisation(TaskManager):
                 summary_save_file = os.path.join(self.summary_saved_path, f"{ans.dataset_type}_{self.model_type}_{context.id}_{context_type}_{self.mask_ratio}.tsv")
                 # summary_save_file = self._result_output_path(self.summary_saved_path, ans.dataset_type, self.model_type, context.id, context_type)
                 # load the summary
-                with open(summary_save_file, 'r') as f:
+                with open(summary_save_file, 'r',encoding='utf-8') as f:
                     summary = f.read()
                     if self.model_instruct_tuned:
                         if 'ASSISTANT:' in summary:
@@ -447,7 +522,7 @@ class QA(TaskManager):
                 questions = self._generate_answer(prompt)
 
                 # save the questions
-                with open(question_save_file, "w") as f:
+                with open(question_save_file, "w",encoding='utf-8') as f:
                     f.write(questions)
 
             # load the questions
@@ -491,7 +566,7 @@ class QA(TaskManager):
 
     def get_answer(self):
         ans = self.ans
-        answer_of_contexts = ans.answer_of_contexts
+        answer_of_contexts = ans.answer_of_contexts if ans.answer_of_contexts is not None else {}
         logging.info(f"Answer generation task is started.")
         for context_type, contexts in ans.contexts_dict.items():
             answer_of_contexts[context_type] = []
@@ -519,7 +594,7 @@ class QA(TaskManager):
                         answers = self._generate_answer(prompt)
 
                         # save the questions
-                        with open(answer_save_file, "w") as f:
+                        with open(answer_save_file, "w",encoding='utf-8') as f:
                             f.write(answers)
                     else:
                         # which means the model is running on real machine, so we do batch generation
@@ -529,7 +604,7 @@ class QA(TaskManager):
             if self.model_type != 'gpt-3.5-turbo' and len(prompts)!=0:
                 outs = self._lm_answer_batch(prompts)
                 for out_file, out in zip(out_files, outs):
-                    with open(out_file, "w") as f:
+                    with open(out_file, "w",encoding='utf-8') as f:
                         # we do not process the original output, we leave it to the post-processing below
                         f.write(out)
             
@@ -539,7 +614,7 @@ class QA(TaskManager):
                 answer_save_file = self._result_output_path(self.question_saved_path, ans.dataset_type, self.model_type, context.id, context_type)
                 # load the answers
                 try:
-                    with open(answer_save_file, "r") as f:
+                    with open(answer_save_file, "r",encoding='utf-8') as f:
                         answer = f.read()
                         if not self.model_instruct_tuned:
                             answers = [answer.rsplit("\n\n", 1)[0]]
@@ -642,20 +717,20 @@ class OriginalContextReconsutrction(TaskManager):
                         summary = self._generate_answer(prompt)
 
                         # save the summary
-                        with open(summary_save_file, 'w') as f:
+                        with open(summary_save_file, 'w',encoding='utf-8') as f:
                             f.write(summary)
             
             if self.model_type != 'gpt-3.5-turbo' and len(prompts)!=0:
                 # generate the summaries in batch
                 outs = self._lm_answer_batch(prompts)
                 for out, out_file in zip(outs, out_files):
-                    with open(out_file, 'w') as f:
+                    with open(out_file, 'w',encoding='utf-8') as f:
                         f.write(out)
             
             for context in contexts:
                 summary_save_file = os.path.join(self.summary_saved_path, f"{ans.dataset_type}_{self.model_type}_{context.id}_{context_type}_{self.mask_ratio}.tsv")
                 # load the summary
-                with open(summary_save_file, 'r') as f:
+                with open(summary_save_file, 'r',encoding='utf-8') as f:
                     summary = f.read()
                     if not self.model_instruct_tuned:
                         summary = summary.rsplit("\n", 1)[0]

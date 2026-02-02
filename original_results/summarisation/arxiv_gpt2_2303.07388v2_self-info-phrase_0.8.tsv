@@ -1,0 +1,100 @@
+
+/*
+
+* We have found that the
+
+* first argument is a tuple of a string (or
+
+* a list of string values), and that
+
+* the second argument is the final argument, which is
+
+* a list of strings.
+
+*/
+
+string = strtoupper (
+
+tuple (substr ( " \\ " ), " \w+ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr ( " \\ " ),
+
+substr (

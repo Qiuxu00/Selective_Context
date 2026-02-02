@@ -1,0 +1,8 @@
+
+this is a pretty simple proof. But if you want to actually check it yourself, then you are going to have to write it yourself:
+
+#include <stdio.h> #include <fmt.h> #include <string.h> struct s_list { s_s(0x01, 0x02, 0x03, 0x04, 0x05); }; struct s_list * s_list = &s_list; struct s_list * s_list_s = NULL; struct s_list * s_list_list = NULL; s_list_s = NULL; struct s_list * s_list_list = NULL; s_list_s->s_list; s_list_s->s_list = NULL; s_list_s->s_list; // s_list_list = s_list_list; s_list_s->s_list = NULL; s_list_s->s_list; s_list_s->s_list = NULL; s_list_s->s_list; } s_list_s->s_list = s_list; // s_list = s_list; s_list_s->s_list = NULL; s_list_s->s_list = NULL; s_list_s->s_list = NULL; s_list_s->s_list = NULL; s_list_s->s_list = NULL; }
+
+You can now write:
+
+#include <stdio.h> #include <string.h> struct s_list { s_s(0x01, 0x02, 0x03, 0x04, 0x05); }; struct s_list * s_list = &s_list; struct s_list * s_list = NULL; struct s_list * s_list_s = NULL; s_list_s->s_list = NULL; s_list_s->s_list = NULL; s_list_s->s_list = NULL; s_list

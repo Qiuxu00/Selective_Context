@@ -1,0 +1,36 @@
+
+tls has some of the same issues as tl1 and tl2.
+
+Tls is designed to solve the problems of truncation, and doesn't attempt to fix them.
+
+Tls is defined in an interface called tls.h, which contains the basic idea.
+
+The interface tls.h is not directly equivalent to tls2, but it is written as a bitmap.
+
+To get the idea of the interface, it is necessary to look at the tls.h file.
+
+Here is a list of the files that tls uses.
+
+tls.h is the file that contains the interface tls.h. It is not identical to tls2, but it is easier to understand.
+
+The interface tls.h is a bitmap. It is similar to tls2, but it does have a more specific behavior.
+
+The tls function tls.h is not defined any more.
+
+The interface tls.h is the file that contains the interface tls.h. It is not identical to tls2, but it is easier to understand.
+
+The tls function tls.h is not implemented in any more.
+
+The interface tls.h is the file that contains the interface tls.h. It is not identical to tls2, but it is easier to understand.
+
+The tls function tls.h is not implemented in any more.
+
+The interface tls.h is the file that contains the interface tls.h. It is not identical to tls2, but it is easier to understand.
+
+The tls function tls.h is not implemented in any more.
+
+The interface tls.h is the file that contains the interface tls.h. It is not identical to tls2, but it is easier to understand.
+
+The tls function tls.h is not implemented in any more.
+
+The interface tls.h is the file that contains the interface tls.h. It is not identical to tls2, but it is easier to

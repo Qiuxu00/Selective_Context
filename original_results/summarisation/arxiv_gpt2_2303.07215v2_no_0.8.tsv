@@ -1,0 +1,8 @@
+
+In the future you'll want to add a parse method to your application or publish it to some other server. The default is to use the user-defined version string.
+
+The second option is the method you'd like to use to send a message. You can use <s> or <t> to specify the kind of message you'd like to receive. If you're using the <s> option, you can use the <t> option to specify the kind of message you'd like to receive:
+
+<s> <s> <t> Sent "text" to <s> <t>
+
+If you're using the <t> option, you can specify a version number to be sent before you send the message. There is no version number. The only difference between the two is that the message type is not the same as the kind of message you'd like to receive.

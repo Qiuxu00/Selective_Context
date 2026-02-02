@@ -1,4 +1,4 @@
-from context_manager import *
+﻿from context_manager import *
 import numpy as np
 from typing import List, Dict
 from qa_manager import *

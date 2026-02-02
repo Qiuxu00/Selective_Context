@@ -1,4 +1,4 @@
-from typing import List, Dict, Tuple, Union
+﻿from typing import List, Dict, Tuple, Union
 from dataclasses import dataclass, asdict
 from glob import glob
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -303,10 +303,10 @@ class ArxivContextManager:
                 text = article["text"]
 
                 # remove anything before introduction
-                text = re.sub(r"^.*?(§)", r"\1", text, flags=re.DOTALL)
+                text = re.sub(r"^.*?(搂)", r"\1", text, flags=re.DOTALL)
 
                 # split article into sections
-                sections = re.split(r"(?<!§\.)§\s", text)
+                sections = re.split(r"(?<!搂\.)搂\s", text)
                 sections = [self.beautify_context(section) for section in sections if section.strip()]
             
             if len(sections) == 0:
@@ -658,16 +658,58 @@ class NewsContextManager(ArxivContextManager):
         super().__init__(*args, **kwargs)
     
     def load_articles(self, path):
-        ds = load_dataset(self.ds_name, split=f'train[:{self.num_articles}]')
-        self.articles = []
-        for article in ds:
-            title = article['title']
-            id_ = article['link']
-            content = article['content']
+        """
+        修改版：强制从本地路径加载 JSON 文件，不再连接 Hugging Face。
+        兼容单文件含多条数据，或多文件格式。
+        """
+        import os
+        import json
+        from glob import glob
 
-            self.articles.append(
-                ArxivArticle(text=content, entry_id=id_, title=title, sections=[content])
-            )
+        self.articles = []
+        logging.info(f"Start preprocessing News articles from {path}")
+        
+        # 1. 扫描目录下所有的 json 文件
+        json_files = glob(os.path.join(path, "*.json"))
+        
+        if not json_files:
+            print(f"Warning: No .json files found in {path}")
+            return
+
+        # 2. 遍历读取
+        for file_path in json_files:
+            if len(self.articles) >= self.num_articles:
+                break
+            
+            with open(file_path, "r", encoding='utf-8', errors='ignore') as f:
+                try:
+                    # 尝试加载 json
+                    data = json.load(f)
+                    
+                    # 兼容性处理：文件内容可能是一个列表，也可能是单个字典
+                    if isinstance(data, list):
+                        items = data
+                    else:
+                        items = [data]
+
+                    for article in items:
+                        if len(self.articles) >= self.num_articles:
+                            break
+                        
+                        # 3. 提取字段，兼容 HF 格式 (link, content) 和通用格式 (id, text)
+                        title = article.get('title', '')
+                        # News 数据通常用 link 作为 ID
+                        id_ = article.get('link', article.get('entry_id', str(len(self.articles))))
+                        # 内容可能叫 content 也可能叫 text
+                        content = article.get('content', article.get('text', ''))
+
+                        if content:
+                            self.articles.append(
+                                ArxivArticle(text=content, entry_id=id_, title=title, sections=[content])
+                            )
+                except Exception as e:
+                    print(f"Error reading file {file_path}: {e}")
+                    continue
         
         logging.info(f"Finish preprocessing News articles. Loaded {len(self.articles)} documents.")
         print(f"Finish preprocessing News articles. Loaded {len(self.articles)} documents.")
@@ -676,32 +718,51 @@ class NewsContextManager(ArxivContextManager):
         context = re.sub(r"\s+", " ", context)
         return context
 
-def get_self_information(text, num_retry = 5):
-    # text = text[:1000]
-    openai.api_key = os.environ["OPENAI_API_KEY"]
+def get_self_information(text, num_retry=5):
+    """
+    本地版：使用 GPT-2 计算自信息，不再调用 OpenAI API。
+    """
+    import torch
+    from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
-    for _ in range(num_retry):
-        try:
-            r = openai.Completion.create(
-                model="curie",
-                prompt=f"<|endoftext|>{text}",
-                max_tokens=0,
-                temperature=0,
-                echo=True,
-                logprobs=0,
-            )
-            break
-        except Exception as e:
-            print(e)
-            time.sleep(1)
+    # 1. 静态缓存模型，避免每次调用都重复加载
+    if not hasattr(get_self_information, "model"):
+        model_id = "gpt2"
+        print(f"--- 正在加载本地 {model_id} 计算权重 (Self-Info)... ---")
+        get_self_information.tokenizer = GPT2Tokenizer.from_pretrained(model_id)
+        get_self_information.model = GPT2LMHeadModel.from_pretrained(model_id)
+        # 如果你有显卡，取消下面这行的注释可以加速
+        # get_self_information.model.to("cuda") 
+        get_self_information.model.eval()
 
-    result = r['choices'][0]
-    tokens, logprobs = result["logprobs"]["tokens"][1:], result["logprobs"]["token_logprobs"][1:]
+    tokenizer = get_self_information.tokenizer
+    model = get_self_information.model
+    device = model.device
 
-    assert len(tokens) == len(logprobs), f"Expected {len(tokens)} logprobs, got {len(logprobs)}"
+    # 2. 编码文本
+    # 添加结束符前缀是原作者的要求，模拟 OpenAI 格式
+    input_ids = tokenizer.encode(f"<|endoftext|>{text}", return_tensors="pt").to(device)
+    if input_ids.shape[1] > 1024:
+        input_ids = input_ids[:, :1024]
 
-    self_info = [ -logprob for logprob in logprobs]
-    # TODO: deal with the first delimiter
+    # 3. 计算概率
+    with torch.no_grad():
+        outputs = model(input_ids, labels=input_ids)
+        logits = outputs.logits  # 形状: [1, seq_len, vocab_size]
+
+    # 4. 提取自信息 (-log P)
+    # 我们预测的是从第2个token开始的概率
+    shift_logits = logits[..., :-1, :].contiguous()
+    shift_labels = input_ids[..., 1:].contiguous()
+
+    # 使用 CrossEntropyLoss 计算每个 token 的负对数似然 (即 Self-info)
+    loss_fct = torch.nn.CrossEntropyLoss(reduction='none')
+    self_info_tensor = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
+    
+    self_info = self_info_tensor.cpu().tolist()
+    # 将 token ID 还原为字符串列表
+    tokens = [tokenizer.decode([t]) for t in shift_labels[0]]
+
     return tokens, self_info
 
 
@@ -716,5 +777,5 @@ if __name__ == "__main__":
     context_manager = dataset_manager[dataset_type](context_path)
     contexts = context_manager.generate_context(mask_type, mask_level='phrase')
     print(contexts)
-    with open(f'{dataset_type}_contexts_{mask_type}.pkl', 'wb') as f:
+    with open(f'{dataset_type}_contexts_{mask_type}.pkl', 'wb',encoding='utf-8') as f:
         pickle.dump(contexts, f)

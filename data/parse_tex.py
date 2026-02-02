@@ -1,4 +1,4 @@
-from pylatexenc.latexwalker import LatexWalker, LatexEnvironmentNode, LatexMacroNode
+﻿from pylatexenc.latexwalker import LatexWalker, LatexEnvironmentNode, LatexMacroNode
 from pylatexenc import latex2text
 from pylatexenc.macrospec import LatexContextDb
 

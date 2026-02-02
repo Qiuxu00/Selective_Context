@@ -1,0 +1,28 @@
+
+It's all about setting up your own parser, and using it to parse your data; this post is about setting up your own parser, and using it to parse your data; this post is about getting your data using the webParser.js library.
+
+Getting started
+
+To begin your journey with the webParser, you'll need a browser that supports the WebSocket protocol.
+
+$ npm install --save webParser $ npm install --save webParser-cli $ npm install --save webParser-startup $ npm install --save webParser-startup-cli $ npm install --save webParser-startup-cli
+
+If you have a Node.js dev environment, you'll need to install the webParser package as well.
+
+$ npm install --save webParser
+
+Using the webParser
+
+The webParser
+
+If you're using Node.js, you'll be using the webParser.js library. You shouldn't need to change any of the other modules, as we'll use the webParser.js library for the rest. It uses the WebSocket protocol directly to get the data, and it takes care of parsing it, starting with the input validation.
+
+The webParser is a simple wrapper around the WebSocket that handles the decoding of JSON.
+
+The webParser implements a basic WebSocket protocol, which is what we'll be using as we'll be using the webParser.js library. We'll be using this.socket.connect() to connect to the server. The server will take care of setting up the server connection.
+
+The webParser also supports the use of an HTTP request and response body, which you'll be using when you're parsing. The body is the body of a WebSocket message, which will be passed to the server.
+
+The body contains the data that was received, along with the body of the request and response. The headers contain the headers of the response body, which is parsed by the webParser.
+
+The server sends the data, along with the data that was received, along with the data that was received, along with the data that was received, along with the data that was
