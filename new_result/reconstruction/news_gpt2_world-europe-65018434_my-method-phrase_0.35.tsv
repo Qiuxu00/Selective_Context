@@ -1,0 +1,9 @@
+**********
+
+A. The variable 'dox' is defined in the following way:
+
+[  {b 'Dox' : 0, }]
+
+There are only two possible combinations for this variable. It is possible to use a 'dox' to specify the number of times the dox variable is used. In order to do this, a 'dox' must be defined in the following way: [  {b 'Dox' : 2, }]
+
+A. There is no way to set the number of times to be used in the 'Dox' variable. However, there is still the option to specify, but not to set, the number of times to be used in the 'Dox' variable.

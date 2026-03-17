@@ -6,7 +6,7 @@ import pickle
 import os
 import logging
 import copy
-
+print('It is working')
 def save_as_pickle(obj, file_path):
     with open(file_path, 'wb',encoding='utf-8') as f:
         pickle.dump(obj, f)
@@ -44,7 +44,7 @@ def main():
     # task_types = ['summarisation', 'masked-targeting-qa', 'qa']
     # mask_types = ['self-info-sentence', 'Ramdom', 'no']
 
-    mask_types = ['no', 'self-info', 'Random']
+    mask_types = ['no', 'self-info', 'Random','my-method']
     # mask_types = ['no', 'self-info', 'Random', 'no2']
     mask_levels = ['phrase', ]
 
@@ -58,7 +58,9 @@ def main():
     mask_ratios = [0.2, 0.35, 0.5, 0.65, 0.8]
     # models = ['gpt-3.5-turbo']
     models = [model_name]
-    do_eval = False
+    do_eval = True
+
+    print('Flag_1')
 
     dataset_managers = {
         'arxiv': ArxivContextManager,

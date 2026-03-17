@@ -1,6 +1,5 @@
 transformers
 spacy
-en-core-web-sm
 bs4
 evaluate
 openai

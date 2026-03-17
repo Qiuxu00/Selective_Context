@@ -19,8 +19,14 @@ import spacy
 from datasets import load_dataset
 from filelock import FileLock
 import traceback
-
-
+import torch
+#修改>
+# 在 context_manager.py 顶部添加
+try:
+    from my_compression import MyCustomCompressor
+except ImportError:
+    MyCustomCompressor = None
+#<
 @dataclass
 class LexicalUnits:
     unit_type: str
@@ -75,7 +81,8 @@ class Conversation:
 class ArxivContext:
     text: str
     entry_id: str
-    context: str
+    #context: str
+    context:Union[str,torch.Tensor]
     context_masked: bool
     masked_sents: List[str] = None
 
@@ -331,7 +338,7 @@ class ArxivContextManager:
         return True
 
     def generate_context(self, mask_method: str, mask_level: str = 'sent', num_articles : int = None) -> List[ArxivContext]:
-        assert mask_method in ["Random", "self-info", "no", "no2"]
+        assert mask_method in ["Random", "self-info", "no", "no2","my-method"]
         resulting_contexts = []
 
         if num_articles is None or num_articles > len(self.articles):
@@ -356,6 +363,15 @@ class ArxivContextManager:
                 context, masked_sents = self.random_mask_context(lexical_units.text, mask_level)
             elif mask_method == "self-info":
                 context, masked_sents = self.self_info_mask(lexical_units.text, lexical_units.self_info, mask_level)
+            elif mask_method == "my-method":
+                if MyCustomCompressor is not None:
+                    # 实例化你的压缩器（假设你在 __init__ 里处理了模型加载）
+                    compressor = MyCustomCompressor() 
+                    # 将碎片列表(lexical_units.text)传进去
+                    # 注意：此时返回的 context 将是一个 Tensor
+                    context, masked_sents = compressor.compress(lexical_units.text, self.mask_ratio)
+                else:
+                    raise ImportError("无法加载 MyCustomCompressor，请检查 my_compression.py")
             elif ( self.__class__.__name__ == 'ConversationContextManager' and \
                 mask_method == "no" ):
 
@@ -732,7 +748,7 @@ def get_self_information(text, num_retry=5):
         get_self_information.tokenizer = GPT2Tokenizer.from_pretrained(model_id)
         get_self_information.model = GPT2LMHeadModel.from_pretrained(model_id)
         # 如果你有显卡，取消下面这行的注释可以加速
-        # get_self_information.model.to("cuda") 
+        get_self_information.model.to("cuda") 
         get_self_information.model.eval()
 
     tokenizer = get_self_information.tokenizer

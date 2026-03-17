@@ -207,31 +207,48 @@ class TaskManager:
             self._generate_answer = self._lm_generate
     
     def _lm_generate(self, prompt, num_retry=5):
-        # === 修复点 1：输入截断 (核心防爆锁) ===
-        # GPT-2 上限 1024。我们预留 500 给生成，输入强制限制在 520 以内。
-        # truncation=True 是防止爆仓的关键
-        inputs = self.tokenizer(prompt, return_tensors="pt", truncation=True, max_length=520)
-        input_ids = inputs.input_ids.to(self.model.device)
-
-        with torch.no_grad():
-            # === 修复点 2：更安全的配置读取 ===
-            # 防止 self.generation_config 未定义
-            g_config = getattr(self, 'generation_config', None)
-            
-            outputs = self.model.generate(
-                input_ids, 
-                generation_config=g_config, 
-                return_dict_in_generate=True, 
-                max_new_tokens=500,
-                # === 修复点 3：显式指定 pad_token，消除警告 ===
-                pad_token_id=self.tokenizer.eos_token_id 
-            )
+        # 初始化 outputs 为 None，防止引用错误
+        outputs = None
         
-        s = outputs.sequences[0]
-        prompt_len = input_ids.shape[1]
-        # === 修复点 4：解码时跳过特殊符号 (可选优化) ===
-        output = self.tokenizer.decode(s[prompt_len:], skip_special_tokens=True)
-        return output
+        # 1. 处理 Tensor 输入（魔改向量分支）
+        if isinstance(prompt, torch.Tensor):
+            with torch.no_grad():
+                # 检查 Tensor 维度，GPT-2 需要 [batch, seq_len, hidden_size]
+                if prompt.ndim == 2:
+                    prompt = prompt.unsqueeze(0)
+                
+                outputs = self.model.generate(
+                    inputs_embeds=prompt,
+                    generation_config=self.generation_config,
+                    # 注意：这里只传必要的参数，避免之前警告提到的重复冲突
+                    max_new_tokens=450,
+                    pad_token_id=self.tokenizer.eos_token_id
+                )
+        
+        # 2. 处理 String 输入（普通文本分支，如 QA 任务的问题生成）
+        else:
+            inputs = self.tokenizer(prompt, return_tensors="pt", truncation=True, max_length=520)
+            input_ids = inputs.input_ids.to(self.model.device)
+            
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    input_ids,
+                    generation_config=self.generation_config,
+                    max_new_tokens=450,
+                    pad_token_id=self.tokenizer.eos_token_id
+                )
+
+        # 3. 统一返回处理
+        if outputs is not None:
+            # 如果是 Tensor 输入，decode 整个序列
+            if isinstance(prompt, torch.Tensor):
+                return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            # 如果是 String 输入，只 decode 生成的部分（跳过输入的 Prompt 长度）
+            else:
+                prompt_len = input_ids.shape[1]
+                return self.tokenizer.decode(outputs[0][prompt_len:], skip_special_tokens=True)
+        else:
+            return ""
     
     def _lm_answer_batch(self, prompts):
         # 1. 确保生成器（Pipeline）已初始化
@@ -353,6 +370,7 @@ class Evaluator:
         # evaluate the answer
         # should support rouge, bleu, and other metrics?
         results = {}
+        predictions = [p if (isinstance(p, str) and p.strip()) else "empty_response" for p in predictions]
         for metric_name, metric in self.metrics.items():
             if metric_name == 'bertscore':
                 score = metric.compute(predictions=predictions, references=references, lang='en')
@@ -377,6 +395,13 @@ class Summarisation(TaskManager):
             os.makedirs(self.summary_saved_path)
     
     def prompt_for_the_task(self, context: ArxivContext):
+        if isinstance(context.context, torch.Tensor):
+            if self.model_type == "flan-t5-xxl":
+                return "Summarize: "
+            elif not self.model_instruct_tuned:
+                return "The following is a document, please provide a summary: "
+            else:
+                return "Summarize the above content: "
         if self.model_type == "flan-t5-xxl":
             prompt = f"Summarize: {context.context}"
         elif 'vicuna' in self.model_type:
@@ -391,56 +416,90 @@ class Summarisation(TaskManager):
     def get_answer(self):
         ans = self.ans
         answer_of_contexts = ans.answer_of_contexts if ans.answer_of_contexts is not None else {}
+        
         for context_type, contexts in ans.contexts_dict.items():
             answer_of_contexts[context_type] = []
-            # if context_type not in answer_of_contexts:
-            #     answer_of_contexts[context_type] = []
-            # else:
-            #     continue
 
+            # 只有非 GPT-3.5 模型才需要准备 prompts 队列
             if self.model_type != "gpt-3.5-turbo":
                 prompts = []
                 out_files = []
+
             for context in contexts:
                 summary_save_file = os.path.join(self.summary_saved_path, f"{ans.dataset_type}_{self.model_type}_{context.id}_{context_type}_{self.mask_ratio}.tsv")
-                # summary_save_file = self._result_output_path(self.summary_saved_path, ans.dataset_type, self.model_type, context.id, context_type)
+                
+                # 如果结果文件已存在，跳过生成
                 if os.path.exists(summary_save_file):
-                    pass
+                    continue
+                
+                # --- 魔改接入点：判断输入是否为 Tensor 向量 ---
+                if isinstance(context.context, torch.Tensor):
+                    # 1. 获取指令向量
+                    instruction_text = self.prompt_for_the_task(context)
+                    instr_ids = self.tokenizer.encode(instruction_text, return_tensors="pt").to(self.model.device)
+                    instr_embeds = self.model.get_input_embeddings()(instr_ids) # [1, instr_len, 768]
+                    
+                    # 2. 计算安全长度 (GPT-2 限制 1024，我们预留生成空间，输入限额设为 570)
+                    MAX_INPUT_LEN = 570 
+                    available_len_for_magic = MAX_INPUT_LEN - instr_ids.shape[1]
+                    
+                    # 3. 强制截断魔改向量 (如果太长就切掉)
+                    # context.context 形状是 [1, seq_len, 768]
+                    magic_vectors = context.context
+                    if magic_vectors.shape[1] > available_len_for_magic:
+                        magic_vectors = magic_vectors[:, :available_len_for_magic, :]
+                        print(f"⚠️ 警告：魔改向量过长，已从 {context.context.shape[1]} 截断至 {available_len_for_magic}")
+
+                    # 4. 拼接
+                    full_embeds = torch.cat([instr_embeds, magic_vectors], dim=1)
+                    
+                    # 打印最终长度确认没爆
+                    # print(f"DEBUG: 拼接后的总长度为 {full_embeds.shape[1]}")
+                    
+                    # 3. 直接调用魔改后的推理函数（因为 Tensor 无法进行批处理）
+                    summary = self._lm_generate(full_embeds)
+                    
+                    # 4. 立即保存结果，确保第三阶段能读取到
+                    with open(summary_save_file, 'w', encoding='utf-8') as f:
+                        f.write(summary)
+                    print(f"Tensor result saved to {summary_save_file}")
+
                 else:
+                    # --- 原有逻辑：处理普通文本字符串 ---
                     prompt = self.prompt_for_the_task(context)
                     if self.model_type == "gpt-3.5-turbo":
                         summary = self._generate_answer(prompt)
-                        # save the summary
-                        with open(summary_save_file, 'w',encoding='utf-8') as f:
+                        with open(summary_save_file, 'w', encoding='utf-8') as f:
                             f.write(summary)
                     else:
+                        # 收集普通文本，准备后续批处理
                         prompts.append(prompt)
                         out_files.append(summary_save_file)
             
-            if self.model_type != "gpt-3.5-turbo" and len(prompts)!=0:
-                # generate answers
+            # 第二阶段：对普通文本进行批处理生成
+            if self.model_type != "gpt-3.5-turbo" and len(prompts) != 0:
                 summaries = self._lm_answer_batch(prompts)
                 for summary, summary_save_file in zip(summaries, out_files):
-                    # save the summary
-                    with open(summary_save_file, 'w',encoding='utf-8') as f:
+                    with open(summary_save_file, 'w', encoding='utf-8') as f:
                         f.write(summary)
-                    print(f"Saved to {summary_save_file}")
+                    print(f"Batch result saved to {summary_save_file}")
             
+            # 第三阶段：统一读取所有生成的 .tsv 文件到内存中
             for context in contexts:
                 summary_save_file = os.path.join(self.summary_saved_path, f"{ans.dataset_type}_{self.model_type}_{context.id}_{context_type}_{self.mask_ratio}.tsv")
-                # summary_save_file = self._result_output_path(self.summary_saved_path, ans.dataset_type, self.model_type, context.id, context_type)
-                # load the summary
-                with open(summary_save_file, 'r',encoding='utf-8') as f:
+                
+                with open(summary_save_file, 'r', encoding='utf-8') as f:
                     summary = f.read()
+                    # 根据模型是否经过指令微调进行后处理
                     if self.model_instruct_tuned:
                         if 'ASSISTANT:' in summary:
                             summary = summary.split('ASSISTANT:', 1)[1].strip()
-                        else:
-                            summary = summary
                     elif not self.model_instruct_tuned:
+                        # 针对 GPT-2 等基座模型，截断多余生成的换行符
                         summary = summary.rsplit('\n', 1)[0].strip()
 
                 answer_of_contexts[context_type].append(summary)
+
         ans.answer_of_contexts = answer_of_contexts
         self.ans = ans
         logging.info(f"Summarisation task is done.")
@@ -669,7 +728,9 @@ class QA(TaskManager):
                         continue
                     flatten_answer.append(p)
                     flatten_reference_answer.append(r)
-            
+            if len(flatten_answer) == 0:
+                performance[context_type] = {}
+                continue
             performance[context_type] = evaluator.evaluate(flatten_answer, flatten_reference_answer)
         
         self.ans.metrics = performance

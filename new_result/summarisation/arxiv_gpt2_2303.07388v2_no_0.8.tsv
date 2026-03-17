@@ -1,0 +1,92 @@
+
+}
+
+else
+
+{
+
+if (flags & SIZE_VARIABLE )
+
+{
+
+return ssize_t (flags & SIZE_VARIABLE );
+
+}
+
+else
+
+{
+
+// The value of the size_t bit is zero or 1.
+
+return ssize_t (flags & SIZE_VARIABLE, 0 );
+
+}
+
+}
+
+return ssize_t (flags & SIZE_VARIABLE, 0 );
+
+}
+
+void SIZE_CHECK_VARIABLE ( const char *flags &, size_t size, size_t nb_size)
+
+{
+
+size + = ( size << 1 )? ( size >> 1 ) : ( size << 1 ) ;
+
+nb_size = ( size >> 1 )? ( size >> 1 ) : ( size >> 1 ) ;
+
+while (nb_size > 0 )
+
+{
+
+size += nb_size ;
+
+}
+
+if (nb_size < nb_size )
+
+{
+
+return ;
+
+}
+
+return ;
+
+}
+
+// check for parity
+
+size_t v = ( size & 0xFEED );
+
+// if (!v)
+
+size_t v = v+ 1 ;
+
+// if (v > ssize_t )
+
+size_t v = v+ v ;
+
+if (v < ssize_t )
+
+{
+
+// if (v > ssize_t )
+
+assert (v == ssize_t );
+
+}
+
+return v ;
+
+}
+
+void SIZE_CHECK_DELAY ( const char *flags &) // checks if the number of bytes it is to be used is less than or equal to the number of bytes
+
+{
+
+size_t m = ( size >> 1 )? ( size >> 1 ) : ( size >> 1 ) ;
+
+return ( size & m )? ( size >> 1 ) :

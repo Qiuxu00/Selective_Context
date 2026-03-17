@@ -1,0 +1,564 @@
+2026-03-17 11:36:10,202 - root - INFO - arxiv_path: datasets_dumps/arxiv, news_path: datasets_dumps/news, conversation_path: datasets_dumps/conversation, save_to_path: ./new_result, num_articles: 1, model_name: gpt2, task_name: evaluation
+2026-03-17 11:36:20,087 - root - INFO - Finished loading metrics: dict_keys(['bleu', 'meteor', 'rouge'])
+2026-03-17 11:36:20,745 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:20,745 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-17 11:36:21,051 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:21,333 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:21,601 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:21,876 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:22,163 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:22,851 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:23,131 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:23,625 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/generation_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:23,924 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:24,194 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:24,463 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:24,731 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:25,004 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:25,269 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:25,882 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:26,159 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:26,556 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/generation_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:26,826 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:27,108 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:27,384 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:27,650 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:27,914 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:28,179 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:28,772 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:29,045 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:29,433 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/generation_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:30,932 - root - INFO - Preparing self information...
+2026-03-17 11:36:30,937 - root - INFO - saved to datasets_dumps/news\NewsContextManager_sent.pkl. Finished _preparing_self_info
+2026-03-17 11:36:31,406 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:31,412 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:31,412 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:31,680 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:31,950 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:32,216 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:32,481 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:32,755 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:33,376 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:33,649 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:33,932 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:36:34,090 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:34,156 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_news_0.2.pkl
+2026-03-17 11:36:34,156 - root - INFO - Reconstruction task is started.
+2026-03-17 11:36:34,156 - root - INFO - Reconstruction task is done.
+2026-03-17 11:36:38,674 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:39,007 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:39,261 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:39,480 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: news
+Mask_ratio: 0.2
+Metrics: self-info-phrase: {'bleu': 0.013015536146276343, 'precisions': [0.30569948186528495, 0.025974025974025976, 0.0078125, 0.0026109660574412533], 'brevity_penalty': 0.6487924020348245, 'length_ratio': 0.6980108499095841, 'translation_length': 386, 'reference_length': 553, 'meteor': 0.13170544436302642, 'rouge1': 0.24588086185044358, 'rouge2': 0.043202033036848796, 'rougeL': 0.1926489226869455, 'rougeLsum': 0.08365019011406843}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.7619047619047619, 0.15, 0.0, 0.0], 'brevity_penalty': 9.951146618737898e-12, 'length_ratio': 0.0379746835443038, 'translation_length': 21, 'reference_length': 553, 'meteor': 0.01688518077075884, 'rouge1': 0.0497131931166348, 'rouge2': 0.003838771593090211, 'rougeL': 0.03824091778202677, 'rougeLsum': 0.03824091778202677}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.125, 0.0, 0.0, 0.0], 'brevity_penalty': 0.07149284567794753, 'length_ratio': 0.27486437613019893, 'translation_length': 152, 'reference_length': 553, 'meteor': 0.018393030009680542, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:36:39,485 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_news_0.2.pkl
+2026-03-17 11:36:39,510 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_news_0.2.pkl
+2026-03-17 11:36:39,559 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:39,693 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:39,964 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:40,363 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:40,573 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: news
+Mask_ratio: 0.2
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.15240641711229946, 0.032171581769437, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 3.3392857142857144, 'translation_length': 374, 'reference_length': 112, 'meteor': 0.23313665846700424, 'rouge1': 0.2192393736017897, 'rouge2': 0.04943820224719101, 'rougeL': 0.12080536912751677, 'rougeLsum': 0.1297539149888143}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.09444444444444444, 0.00558659217877095, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.6071428571428572, 'translation_length': 180, 'reference_length': 112, 'meteor': 0.08808724832214766, 'rouge1': 0.08823529411764705, 'rouge2': 0.0074074074074074086, 'rougeL': 0.051470588235294115, 'rougeLsum': 0.0661764705882353}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.08258928571428571, 0.008948545861297539, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 4.0, 'translation_length': 448, 'reference_length': 112, 'meteor': 0.16629780510450257, 'rouge1': 0.1111111111111111, 'rouge2': 0.007692307692307693, 'rougeL': 0.08045977011494253, 'rougeLsum': 0.08045977011494253}
+
+2026-03-17 11:36:40,573 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_news_0.2.pkl
+2026-03-17 11:36:40,679 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_news_0.2.pkl
+2026-03-17 11:36:40,679 - root - INFO - Answer generation task is started.
+2026-03-17 11:36:40,679 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:40,679 - root - INFO - Performance summary:
+task type: qa
+dataset type: news
+Mask_ratio: 0.2
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:36:40,683 - root - INFO - Saved to ./new_result\answer_gpt2_qa_news_0.2.pkl
+2026-03-17 11:36:40,687 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:40,692 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:40,696 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:41,276 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:41,553 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:41,821 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:42,093 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:42,371 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:42,972 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:43,251 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:43,538 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:36:43,647 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:43,695 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_news_0.35.pkl
+2026-03-17 11:36:43,695 - root - INFO - Reconstruction task is started.
+2026-03-17 11:36:43,695 - root - INFO - Reconstruction task is done.
+2026-03-17 11:36:43,780 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:44,026 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:44,273 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:44,448 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: news
+Mask_ratio: 0.35
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 0.00036363685525521927, 'length_ratio': 0.11211573236889692, 'translation_length': 62, 'reference_length': 553, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 3.4948470428438956e-11, 'precisions': [0.9130434782608695, 0.4090909090909091, 0.2857142857142857, 0.15], 'brevity_penalty': 9.82527121608528e-11, 'length_ratio': 0.04159132007233273, 'translation_length': 23, 'reference_length': 553, 'meteor': 0.026257656888543084, 'rouge1': 0.07575757575757576, 'rouge2': 0.034220532319391636, 'rougeL': 0.06439393939393939, 'rougeLsum': 0.06439393939393939}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.38823529411764707, 0.047619047619047616, 0.0, 0.0], 'brevity_penalty': 0.004062802173426934, 'length_ratio': 0.15370705244122965, 'translation_length': 85, 'reference_length': 553, 'meteor': 0.04304078400185215, 'rouge1': 0.10301953818827708, 'rouge2': 0.0106951871657754, 'rougeL': 0.07104795737122557, 'rougeLsum': 0.07104795737122557}
+
+2026-03-17 11:36:44,454 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_news_0.35.pkl
+2026-03-17 11:36:44,479 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_news_0.35.pkl
+2026-03-17 11:36:44,521 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:44,575 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:44,789 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:45,025 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:45,214 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: news
+Mask_ratio: 0.35
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 4.1197127232074644e-19, 'length_ratio': 0.023076923076923078, 'translation_length': 3, 'reference_length': 130, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.5454545454545454, 0.1, 0.0, 0.0], 'brevity_penalty': 2.0031954825181965e-05, 'length_ratio': 0.08461538461538462, 'translation_length': 11, 'reference_length': 130, 'meteor': 0.02919099249374479, 'rouge1': 0.04580152671755726, 'rouge2': 0.0, 'rougeL': 0.04580152671755726, 'rougeLsum': 0.04580152671755726}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.08482142857142858, 0.011185682326621925, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 3.4461538461538463, 'translation_length': 448, 'reference_length': 130, 'meteor': 0.13141809290953546, 'rouge1': 0.12592592592592594, 'rouge2': 0.011152416356877323, 'rougeL': 0.1037037037037037, 'rougeLsum': 0.1037037037037037}
+
+2026-03-17 11:36:45,220 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_news_0.35.pkl
+2026-03-17 11:36:45,317 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_news_0.35.pkl
+2026-03-17 11:36:45,317 - root - INFO - Answer generation task is started.
+2026-03-17 11:36:45,317 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:45,317 - root - INFO - Performance summary:
+task type: qa
+dataset type: news
+Mask_ratio: 0.35
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:36:45,323 - root - INFO - Saved to ./new_result\answer_gpt2_qa_news_0.35.pkl
+2026-03-17 11:36:45,328 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:45,329 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:45,335 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:45,618 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:45,894 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:46,174 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:46,455 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:46,734 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:47,349 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:47,660 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:47,942 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:36:48,055 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:48,105 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_news_0.5.pkl
+2026-03-17 11:36:48,106 - root - INFO - Reconstruction task is started.
+2026-03-17 11:36:48,106 - root - INFO - Reconstruction task is done.
+2026-03-17 11:36:48,189 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:48,432 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:48,683 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:48,834 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: news
+Mask_ratio: 0.5
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.018867924528301886, 0.0, 0.0, 0.0], 'brevity_penalty': 7.996174188209589e-05, 'length_ratio': 0.09584086799276673, 'translation_length': 53, 'reference_length': 553, 'meteor': 0.0009869719699960521, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.7777777777777778, 0.125, 0.0, 0.0], 'brevity_penalty': 5.614502972116842e-27, 'length_ratio': 0.0162748643761302, 'translation_length': 9, 'reference_length': 553, 'meteor': 0.007964954201513342, 'rouge1': 0.01949317738791423, 'rouge2': 0.00391389432485323, 'rougeL': 0.01949317738791423, 'rougeLsum': 0.01949317738791423}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 0.06810758670536468, 'length_ratio': 0.27124773960216997, 'translation_length': 150, 'reference_length': 553, 'meteor': 0.0009661835748792271, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:36:48,834 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_news_0.5.pkl
+2026-03-17 11:36:48,859 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_news_0.5.pkl
+2026-03-17 11:36:48,893 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:48,986 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:49,195 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:49,421 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:49,573 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: news
+Mask_ratio: 0.5
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.01694915254237288, 0.0028328611898017, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 23.6, 'translation_length': 354, 'reference_length': 15, 'meteor': 0.060120240480961935, 'rouge1': 0.023054755043227664, 'rouge2': 0.0, 'rougeL': 0.023054755043227664, 'rougeLsum': 0.017291066282420747}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 0.01831563888873418, 'length_ratio': 0.2, 'translation_length': 3, 'reference_length': 15, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.008928571428571428, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 29.866666666666667, 'translation_length': 448, 'reference_length': 15, 'meteor': 0.042881646655231566, 'rouge1': 0.014018691588785047, 'rouge2': 0.0, 'rougeL': 0.009345794392523364, 'rougeLsum': 0.009345794392523364}
+
+2026-03-17 11:36:49,581 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_news_0.5.pkl
+2026-03-17 11:36:49,687 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_news_0.5.pkl
+2026-03-17 11:36:49,688 - root - INFO - Answer generation task is started.
+2026-03-17 11:36:49,688 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:49,688 - root - INFO - Performance summary:
+task type: qa
+dataset type: news
+Mask_ratio: 0.5
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:36:49,689 - root - INFO - Saved to ./new_result\answer_gpt2_qa_news_0.5.pkl
+2026-03-17 11:36:49,698 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:49,702 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:49,707 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:49,985 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:50,258 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:50,527 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:50,801 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:51,071 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:51,687 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:51,971 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:52,248 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:36:52,366 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:52,415 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_news_0.65.pkl
+2026-03-17 11:36:52,415 - root - INFO - Reconstruction task is started.
+2026-03-17 11:36:52,415 - root - INFO - Reconstruction task is done.
+2026-03-17 11:36:52,548 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:52,888 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:53,147 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:53,368 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: news
+Mask_ratio: 0.65
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.41711229946524064, 0.040214477211796246, 0.005376344086021506, 0.0], 'brevity_penalty': 0.6196443307258926, 'length_ratio': 0.6763110307414105, 'translation_length': 374, 'reference_length': 553, 'meteor': 0.17893565733358058, 'rouge1': 0.3097560975609756, 'rouge2': 0.024449877750611245, 'rougeL': 0.14878048780487804, 'rougeLsum': 0.17804878048780487}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.75, 0.0, 0.0, 0.0], 'brevity_penalty': 2.472192922524661e-60, 'length_ratio': 0.007233273056057866, 'translation_length': 4, 'reference_length': 553, 'meteor': 0.0029898345624875416, 'rouge1': 0.011764705882352941, 'rouge2': 0.003937007874015748, 'rougeL': 0.011764705882352941, 'rougeLsum': 0.011764705882352941}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.1099476439790576, 0.0, 0.0, 0.0], 'brevity_penalty': 0.15027505589355364, 'length_ratio': 0.3453887884267631, 'translation_length': 191, 'reference_length': 553, 'meteor': 0.017301038062283735, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:36:53,374 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_news_0.65.pkl
+2026-03-17 11:36:53,396 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_news_0.65.pkl
+2026-03-17 11:36:53,434 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:53,562 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:53,857 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:54,102 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:54,368 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: news
+Mask_ratio: 0.65
+Metrics: self-info-phrase: {'bleu': 0.04691394214937843, 'precisions': [0.4876712328767123, 0.09615384615384616, 0.02203856749311295, 0.0055248618784530384], 'brevity_penalty': 0.9597370959507374, 'length_ratio': 0.9605263157894737, 'translation_length': 365, 'reference_length': 380, 'meteor': 0.2765483320618796, 'rouge1': 0.4421364985163205, 'rouge2': 0.0892857142857143, 'rougeL': 0.18694362017804153, 'rougeLsum': 0.3679525222551929}
+Random-phrase: {'bleu': 0.0, 'precisions': [1.0, 0.0, 0.0, 0.0], 'brevity_penalty': 2.5257557983503035e-165, 'length_ratio': 0.002631578947368421, 'translation_length': 1, 'reference_length': 380, 'meteor': 0.0014351320321469574, 'rouge1': 0.005747126436781608, 'rouge2': 0.0, 'rougeL': 0.005747126436781608, 'rougeLsum': 0.005747126436781608}
+my-method-phrase: {'bleu': 0.021007053353873706, 'precisions': [0.28794642857142855, 0.03355704697986577, 0.008968609865470852, 0.0022471910112359553], 'brevity_penalty': 1.0, 'length_ratio': 1.1789473684210525, 'translation_length': 448, 'reference_length': 380, 'meteor': 0.1881402819949424, 'rouge1': 0.2879581151832461, 'rouge2': 0.05774278215223096, 'rougeL': 0.1963350785340314, 'rougeLsum': 0.2225130890052356}
+
+2026-03-17 11:36:54,373 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_news_0.65.pkl
+2026-03-17 11:36:54,477 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_news_0.65.pkl
+2026-03-17 11:36:54,477 - root - INFO - Answer generation task is started.
+2026-03-17 11:36:54,477 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:54,477 - root - INFO - Performance summary:
+task type: qa
+dataset type: news
+Mask_ratio: 0.65
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:36:54,477 - root - INFO - Saved to ./new_result\answer_gpt2_qa_news_0.65.pkl
+2026-03-17 11:36:54,482 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:54,487 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:54,492 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:54,771 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:55,043 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:55,336 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:36:55,606 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:36:55,881 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:36:56,486 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:56,763 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:36:57,056 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:36:57,164 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:36:57,214 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_news_0.8.pkl
+2026-03-17 11:36:57,214 - root - INFO - Reconstruction task is started.
+2026-03-17 11:36:57,214 - root - INFO - Reconstruction task is done.
+2026-03-17 11:36:57,347 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:57,710 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:58,069 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:58,405 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: news
+Mask_ratio: 0.8
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.36883116883116884, 0.044270833333333336, 0.0026109660574412533, 0.0], 'brevity_penalty': 0.6463826349633214, 'length_ratio': 0.6962025316455697, 'translation_length': 385, 'reference_length': 553, 'meteor': 0.17096446088087536, 'rouge1': 0.29698375870069604, 'rouge2': 0.027906976744186046, 'rougeL': 0.14385150812064967, 'rougeLsum': 0.14849187935034802}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.7017543859649122, 0.14285714285714285, 0.0, 0.0], 'brevity_penalty': 0.00016629381139377246, 'length_ratio': 0.10307414104882459, 'translation_length': 57, 'reference_length': 553, 'meteor': 0.04628435375812998, 'rouge1': 0.11870503597122302, 'rouge2': 0.021660649819494584, 'rougeL': 0.07913669064748201, 'rougeLsum': 0.08633093525179857}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.13978494623655913, 0.0, 0.0, 0.0], 'brevity_penalty': 0.13902266806128383, 'length_ratio': 0.33634719710669075, 'translation_length': 186, 'reference_length': 553, 'meteor': 0.025130485211676008, 'rouge1': 0.008683068017366135, 'rouge2': 0.0, 'rougeL': 0.008683068017366135, 'rougeLsum': 0.005788712011577424}
+
+2026-03-17 11:36:58,410 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_news_0.8.pkl
+2026-03-17 11:36:58,431 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_news_0.8.pkl
+2026-03-17 11:36:58,467 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:58,568 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:58,825 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:59,063 - absl - INFO - Using default tokenizer.
+2026-03-17 11:36:59,263 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: news
+Mask_ratio: 0.8
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.22043010752688172, 0.04851752021563342, 0.005405405405405406, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 2.2275449101796405, 'translation_length': 372, 'reference_length': 167, 'meteor': 0.24342620005695473, 'rouge1': 0.27364185110663986, 'rouge2': 0.05252525252525253, 'rougeL': 0.13279678068410464, 'rougeLsum': 0.19718309859154928}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.3333333333333333, 0.0, 0.0, 0.0], 'brevity_penalty': 1.8137119841515487e-24, 'length_ratio': 0.017964071856287425, 'translation_length': 3, 'reference_length': 167, 'meteor': 0.009124087591240875, 'rouge1': 0.013157894736842105, 'rouge2': 0.0, 'rougeL': 0.013157894736842105, 'rougeLsum': 0.013157894736842105}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.10491071428571429, 0.013422818791946308, 0.002242152466367713, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 2.682634730538922, 'translation_length': 448, 'reference_length': 167, 'meteor': 0.13760602280127737, 'rouge1': 0.13028169014084506, 'rouge2': 0.017667844522968202, 'rougeL': 0.11971830985915494, 'rougeLsum': 0.11971830985915494}
+
+2026-03-17 11:36:59,268 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_news_0.8.pkl
+2026-03-17 11:36:59,355 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_news_0.8.pkl
+2026-03-17 11:36:59,355 - root - INFO - Answer generation task is started.
+2026-03-17 11:36:59,355 - root - INFO - Summarisation task is done.
+2026-03-17 11:36:59,355 - root - INFO - Performance summary:
+task type: qa
+dataset type: news
+Mask_ratio: 0.8
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:36:59,361 - root - INFO - Saved to ./new_result\answer_gpt2_qa_news_0.8.pkl
+2026-03-17 11:37:00,165 - root - INFO - Preparing self information...
+2026-03-17 11:37:00,165 - root - INFO - saved to datasets_dumps/arxiv\ArxivContextManager_sent.pkl. Finished _preparing_self_info
+2026-03-17 11:37:00,464 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:00,464 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:00,464 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:00,758 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:01,037 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:01,310 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:37:01,580 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:01,849 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:37:02,450 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:02,728 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:03,018 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:37:03,163 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:03,210 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_arxiv_0.2.pkl
+2026-03-17 11:37:03,210 - root - INFO - Reconstruction task is started.
+2026-03-17 11:37:03,211 - root - INFO - Reconstruction task is done.
+2026-03-17 11:37:03,300 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:03,510 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:03,732 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:03,888 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: arxiv
+Mask_ratio: 0.2
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 141.0, 'translation_length': 282, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.0034129692832764505, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 146.5, 'translation_length': 293, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.002331002331002331, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 214.5, 'translation_length': 429, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.011904761904761906, 'rouge2': 0.0, 'rougeL': 0.011904761904761906, 'rougeLsum': 0.011904761904761906}
+
+2026-03-17 11:37:03,888 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_arxiv_0.2.pkl
+2026-03-17 11:37:04,022 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_arxiv_0.2.pkl
+2026-03-17 11:37:04,162 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:04,214 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:04,673 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:04,936 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:05,126 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: arxiv
+Mask_ratio: 0.2
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.4691358024691358, 0.30578512396694213, 0.14107883817427386, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.08, 'translation_length': 243, 'reference_length': 225, 'meteor': 0.49910006505403964, 'rouge1': 0.5461254612546126, 'rouge2': 0.2527881040892193, 'rougeL': 0.5461254612546126, 'rougeLsum': 0.5461254612546126}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.049586776859504134, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.6133333333333333, 'translation_length': 363, 'reference_length': 225, 'meteor': 0.038910505836575876, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.8977777777777778, 'translation_length': 427, 'reference_length': 225, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:37:05,126 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_arxiv_0.2.pkl
+2026-03-17 11:37:05,285 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_arxiv_0.2.pkl
+2026-03-17 11:37:05,285 - root - INFO - Answer generation task is started.
+2026-03-17 11:37:05,285 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:05,285 - root - INFO - Performance summary:
+task type: qa
+dataset type: arxiv
+Mask_ratio: 0.2
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:37:05,285 - root - INFO - Saved to ./new_result\answer_gpt2_qa_arxiv_0.2.pkl
+2026-03-17 11:37:05,285 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:05,290 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:05,290 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:05,570 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:05,845 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:06,111 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:37:06,385 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:06,662 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:37:07,257 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:07,532 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:07,819 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:37:07,930 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:07,967 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_arxiv_0.35.pkl
+2026-03-17 11:37:07,967 - root - INFO - Reconstruction task is started.
+2026-03-17 11:37:07,967 - root - INFO - Reconstruction task is done.
+2026-03-17 11:37:08,032 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:08,247 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:08,474 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:08,630 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: arxiv
+Mask_ratio: 0.35
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 291.0, 'translation_length': 582, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.0025252525252525255, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 198.0, 'translation_length': 396, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.005970149253731344, 'rouge2': 0.0, 'rougeL': 0.005970149253731344, 'rougeLsum': 0.005970149253731344}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 195.0, 'translation_length': 390, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:37:08,630 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_arxiv_0.35.pkl
+2026-03-17 11:37:08,656 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_arxiv_0.35.pkl
+2026-03-17 11:37:08,692 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:08,749 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:08,961 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:09,238 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:09,424 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: arxiv
+Mask_ratio: 0.35
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 0.7428231402192642, 'length_ratio': 0.7708333333333334, 'translation_length': 148, 'reference_length': 192, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.19205298013245034, 0.0, 0.0, 0.0], 'brevity_penalty': 0.7622176159675498, 'length_ratio': 0.7864583333333334, 'translation_length': 151, 'reference_length': 192, 'meteor': 0.07716870675891431, 'rouge1': 0.20938628158844766, 'rouge2': 0.0, 'rougeL': 0.20216606498194947, 'rougeLsum': 0.20938628158844766}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.10772833723653395, 0.0539906103286385, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 2.2239583333333335, 'translation_length': 427, 'reference_length': 192, 'meteor': 0.0, 'rouge1': 0.09484536082474226, 'rouge2': 0.0, 'rougeL': 0.09484536082474226, 'rougeLsum': 0.09484536082474226}
+
+2026-03-17 11:37:09,424 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_arxiv_0.35.pkl
+2026-03-17 11:37:09,445 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_arxiv_0.35.pkl
+2026-03-17 11:37:09,445 - root - INFO - Answer generation task is started.
+2026-03-17 11:37:09,445 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:09,445 - root - INFO - Performance summary:
+task type: qa
+dataset type: arxiv
+Mask_ratio: 0.35
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:37:09,450 - root - INFO - Saved to ./new_result\answer_gpt2_qa_arxiv_0.35.pkl
+2026-03-17 11:37:09,450 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:09,450 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:09,450 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:09,733 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:10,009 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:10,280 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:37:10,556 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:10,831 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:37:11,421 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:11,696 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:11,980 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:37:12,090 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:12,126 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_arxiv_0.5.pkl
+2026-03-17 11:37:12,126 - root - INFO - Reconstruction task is started.
+2026-03-17 11:37:12,126 - root - INFO - Reconstruction task is done.
+2026-03-17 11:37:12,194 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:12,412 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:12,634 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:12,784 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: arxiv
+Mask_ratio: 0.5
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.00205761316872428, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 243.0, 'translation_length': 486, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.006557377049180327, 'rouge2': 0.0, 'rougeL': 0.006557377049180327, 'rougeLsum': 0.006557377049180327}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 216.5, 'translation_length': 433, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 206.0, 'translation_length': 412, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:37:12,784 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_arxiv_0.5.pkl
+2026-03-17 11:37:12,805 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_arxiv_0.5.pkl
+2026-03-17 11:37:12,845 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:13,033 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:13,250 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:13,495 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:13,676 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: arxiv
+Mask_ratio: 0.5
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.264840182648402, 'translation_length': 277, 'reference_length': 219, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.07960199004975124, 0.0, 0.0, 0.0], 'brevity_penalty': 0.9143404998207534, 'length_ratio': 0.9178082191780822, 'translation_length': 201, 'reference_length': 219, 'meteor': 0.036832412523020254, 'rouge1': 0.13852813852813853, 'rouge2': 0.0, 'rougeL': 0.13852813852813853, 'rougeLsum': 0.13852813852813853}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.1358313817330211, 0.002347417840375587, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.9497716894977168, 'translation_length': 427, 'reference_length': 219, 'meteor': 0.12210526315789473, 'rouge1': 0.24255319148936166, 'rouge2': 0.004273504273504273, 'rougeL': 0.24255319148936166, 'rougeLsum': 0.24255319148936166}
+
+2026-03-17 11:37:13,676 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_arxiv_0.5.pkl
+2026-03-17 11:37:13,815 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_arxiv_0.5.pkl
+2026-03-17 11:37:13,815 - root - INFO - Answer generation task is started.
+2026-03-17 11:37:13,815 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:13,815 - root - INFO - Performance summary:
+task type: qa
+dataset type: arxiv
+Mask_ratio: 0.5
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:37:13,821 - root - INFO - Saved to ./new_result\answer_gpt2_qa_arxiv_0.5.pkl
+2026-03-17 11:37:13,821 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:13,821 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:13,821 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:14,105 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:14,383 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:14,660 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:37:14,935 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:15,216 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:37:15,805 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:16,084 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:16,368 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:37:16,484 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:16,520 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_arxiv_0.65.pkl
+2026-03-17 11:37:16,520 - root - INFO - Reconstruction task is started.
+2026-03-17 11:37:16,520 - root - INFO - Reconstruction task is done.
+2026-03-17 11:37:16,588 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:16,804 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:17,010 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:17,164 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: arxiv
+Mask_ratio: 0.65
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0012674271229404308, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 394.5, 'translation_length': 789, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.002564102564102564, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 195.0, 'translation_length': 390, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.005934718100890207, 'rouge2': 0.0, 'rougeL': 0.005934718100890207, 'rougeLsum': 0.005934718100890207}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.0029850746268656717, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 167.5, 'translation_length': 335, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.008733624454148471, 'rouge2': 0.0, 'rougeL': 0.008733624454148471, 'rougeLsum': 0.008733624454148471}
+
+2026-03-17 11:37:17,167 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_arxiv_0.65.pkl
+2026-03-17 11:37:17,186 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_arxiv_0.65.pkl
+2026-03-17 11:37:17,227 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:17,300 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:17,537 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:17,781 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:17,962 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: arxiv
+Mask_ratio: 0.65
+Metrics: self-info-phrase: {'bleu': 0.01239350834329233, 'precisions': [0.08285714285714285, 0.017191977077363897, 0.005747126436781609, 0.002881844380403458], 'brevity_penalty': 1.0, 'length_ratio': 2.046783625730994, 'translation_length': 350, 'reference_length': 171, 'meteor': 0.1000555864369094, 'rouge1': 0.12080536912751676, 'rouge2': 0.020270270270270268, 'rougeL': 0.0738255033557047, 'rougeLsum': 0.11409395973154363}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.024193548387096774, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 2.175438596491228, 'translation_length': 372, 'reference_length': 171, 'meteor': 0.02544529262086514, 'rouge1': 0.011904761904761904, 'rouge2': 0.0, 'rougeL': 0.011904761904761904, 'rougeLsum': 0.011904761904761904}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.04918032786885246, 0.002347417840375587, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 2.497076023391813, 'translation_length': 427, 'reference_length': 171, 'meteor': 0.026219192448872573, 'rouge1': 0.03271983640081799, 'rouge2': 0.004106776180698152, 'rougeL': 0.03271983640081799, 'rougeLsum': 0.03271983640081799}
+
+2026-03-17 11:37:17,968 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_arxiv_0.65.pkl
+2026-03-17 11:37:18,100 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_arxiv_0.65.pkl
+2026-03-17 11:37:18,100 - root - INFO - Answer generation task is started.
+2026-03-17 11:37:18,105 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:18,105 - root - INFO - Performance summary:
+task type: qa
+dataset type: arxiv
+Mask_ratio: 0.65
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:37:18,105 - root - INFO - Saved to ./new_result\answer_gpt2_qa_arxiv_0.65.pkl
+2026-03-17 11:37:18,105 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:18,105 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:18,105 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:18,387 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:18,665 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:18,934 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-17 11:37:19,212 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-17 11:37:19,491 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/models/openai-community/gpt2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-17 11:37:20,081 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:20,361 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-17 11:37:20,640 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/gpt2/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-17 11:37:20,750 - root - INFO - Finish generating 1 contexts.
+2026-03-17 11:37:20,899 - root - INFO - Loaded from ./new_result\answer_gpt2_reconstruction_arxiv_0.8.pkl
+2026-03-17 11:37:20,899 - root - INFO - Reconstruction task is started.
+2026-03-17 11:37:20,899 - root - INFO - Reconstruction task is done.
+2026-03-17 11:37:20,972 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:21,189 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:21,393 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:21,542 - root - INFO - Performance summary:
+task type: reconstruction
+dataset type: arxiv
+Mask_ratio: 0.8
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.0025906735751295338, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 193.0, 'translation_length': 386, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.005714285714285714, 'rouge2': 0.0, 'rougeL': 0.005714285714285714, 'rougeLsum': 0.005714285714285714}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 186.5, 'translation_length': 373, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.0, 0.0, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 85.0, 'translation_length': 170, 'reference_length': 2, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+
+2026-03-17 11:37:21,542 - root - INFO - Saved to ./new_result\answer_gpt2_reconstruction_arxiv_0.8.pkl
+2026-03-17 11:37:21,568 - root - INFO - Loaded from ./new_result\answer_gpt2_summarisation_arxiv_0.8.pkl
+2026-03-17 11:37:21,606 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:21,652 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:21,934 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:22,278 - absl - INFO - Using default tokenizer.
+2026-03-17 11:37:22,473 - root - INFO - Performance summary:
+task type: summarisation
+dataset type: arxiv
+Mask_ratio: 0.8
+Metrics: self-info-phrase: {'bleu': 0.0, 'precisions': [0.3333333333333333, 0.0, 0.0, 0.0], 'brevity_penalty': 4.590938473882946e-48, 'length_ratio': 0.00909090909090909, 'translation_length': 3, 'reference_length': 330, 'meteor': 0.0, 'rouge1': 0.0, 'rouge2': 0.0, 'rougeL': 0.0, 'rougeLsum': 0.0}
+Random-phrase: {'bleu': 0.0, 'precisions': [0.05249343832020997, 0.005263157894736842, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.1545454545454545, 'translation_length': 381, 'reference_length': 330, 'meteor': 0.05971769815418024, 'rouge1': 0.06551059730250482, 'rouge2': 0.007736943907156673, 'rougeL': 0.046242774566473986, 'rougeLsum': 0.06551059730250482}
+my-method-phrase: {'bleu': 0.0, 'precisions': [0.04918032786885246, 0.002347417840375587, 0.0, 0.0], 'brevity_penalty': 1.0, 'length_ratio': 1.293939393939394, 'translation_length': 427, 'reference_length': 330, 'meteor': 0.023457235654998194, 'rouge1': 0.04296875, 'rouge2': 0.00392156862745098, 'rougeL': 0.04296875, 'rougeLsum': 0.04296875}
+
+2026-03-17 11:37:22,473 - root - INFO - Saved to ./new_result\answer_gpt2_summarisation_arxiv_0.8.pkl
+2026-03-17 11:37:22,612 - root - INFO - Loaded from ./new_result\answer_gpt2_qa_arxiv_0.8.pkl
+2026-03-17 11:37:22,612 - root - INFO - Answer generation task is started.
+2026-03-17 11:37:22,612 - root - INFO - Summarisation task is done.
+2026-03-17 11:37:22,612 - root - INFO - Performance summary:
+task type: qa
+dataset type: arxiv
+Mask_ratio: 0.8
+Metrics: self-info-phrase: {}
+Random-phrase: {}
+my-method-phrase: {}
+
+2026-03-17 11:37:22,612 - root - INFO - Saved to ./new_result\answer_gpt2_qa_arxiv_0.8.pkl
