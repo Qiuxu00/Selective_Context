@@ -1,18 +1,3 @@
-# 解决 Python 项目环境配置
-
-**Date**: March 17, 2026 at 01:51 PM
-**Turns**: 1
-**Source**: [Gemini Chat](https://gemini.google.com/app/98431610d951200a?hl=ja)
-
----
-
-## Turn 1
-
-### 🤖 Assistant
-
-这份自述文件（README.md）是专门为你基于 **Selective Context** 项目修改后的版本定制的。它记录了你从“离散文本删除”进化到“连续向量卷积”的创新探索。
-
----
 
 # Selective Context (Modified: Convolutional Vector Compression)
 本项目基于原作者的 Selective Context for LLMs 进行深度定制开发。原项目通过计算自信息量（Self-Information）来删除冗余 Token，而本修改版引入了**“软压缩（Soft Compression）”**概念，通过卷积神经网络（CNN）在向量空间对上下文进行语义融合。
@@ -111,11 +96,3 @@ primaryClass={cs.CL}
 }
 
 ```
-
----
-**你想让我继续帮你细化 my_compression.py 中关于卷积数学公式的描述，还是想直接开始下一轮的性能调优实验？**
-
----
-
-*Exported from [Voyager](https://github.com/Nagi-ovo/gemini-voyager)*  
-*Generated on March 17, 2026 at 01:51 PM*
